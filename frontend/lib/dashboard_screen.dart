@@ -9,6 +9,8 @@ import 'auth_check.dart';
 import 'create_appointment_screen.dart';
 import 'edit_appointment_screen.dart';
 
+import 'widgets/sidebar.dart';
+
 class DashboardScreen extends StatefulWidget {
 
   const DashboardScreen({
@@ -301,13 +303,21 @@ class _DashboardScreenState
 
       body: loading
 
-          ? const Center(
+    ? const Center(
 
-              child:
-                  CircularProgressIndicator(),
-            )
+        child:
+            CircularProgressIndicator(),
+      )
 
-          : Padding(
+    : Row(
+
+        children: [
+
+          const Sidebar(),
+
+          Expanded(
+
+            child: Padding(
 
               padding:
                   const EdgeInsets.all(
@@ -451,12 +461,6 @@ class _DashboardScreenState
 
                                           blurRadius:
                                               10,
-
-                                          offset:
-                                              const Offset(
-                                            0,
-                                            4,
-                                          ),
                                         ),
                                       ],
                                     ),
@@ -477,78 +481,21 @@ class _DashboardScreenState
 
                                         children: [
 
-                                          Row(
+                                          Text(
 
-                                            mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                            appointment[
+                                                'customer_name'],
 
-                                            children: [
+                                            style:
+                                                const TextStyle(
 
-                                              Text(
+                                              fontSize:
+                                                  20,
 
-                                                appointment[
-                                                            'customer_name']
-                                                        ?.toString() ??
-                                                    '',
-
-                                                style:
-                                                    const TextStyle(
-
-                                                  fontSize:
-                                                      20,
-
-                                                  fontWeight:
-                                                      FontWeight
-                                                          .bold,
-                                                ),
-                                              ),
-
-                                              Container(
-
-                                                padding:
-                                                    const EdgeInsets
-                                                        .symmetric(
-
-                                                  horizontal:
-                                                      12,
-
-                                                  vertical:
-                                                      6,
-                                                ),
-
-                                                decoration:
-                                                    BoxDecoration(
-
-                                                  color:
-                                                      getStatusColor(
-                                                    status,
-                                                  ),
-
-                                                  borderRadius:
-                                                      BorderRadius
-                                                          .circular(
-                                                    20,
-                                                  ),
-                                                ),
-
-                                                child: Text(
-
-                                                  status
-                                                      .toUpperCase(),
-
-                                                  style:
-                                                      const TextStyle(
-
-                                                    color:
-                                                        Colors.white,
-
-                                                    fontWeight:
-                                                        FontWeight.bold,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
+                                              fontWeight:
+                                                  FontWeight
+                                                      .bold,
+                                            ),
                                           ),
 
                                           const SizedBox(
@@ -556,15 +503,7 @@ class _DashboardScreenState
                                           ),
 
                                           Text(
-
-                                            'Telefone: ${appointment['customer_phone'] ?? ''}',
-
-                                            style:
-                                                const TextStyle(
-
-                                              fontSize:
-                                                  16,
-                                            ),
+                                            'Telefone: ${appointment['customer_phone']}',
                                           ),
 
                                           const SizedBox(
@@ -572,90 +511,7 @@ class _DashboardScreenState
                                           ),
 
                                           Text(
-
-                                            'Preço: R\$ ${appointment['price'] ?? ''}',
-
-                                            style:
-                                                const TextStyle(
-
-                                              fontSize:
-                                                  18,
-
-                                              fontWeight:
-                                                  FontWeight.bold,
-                                            ),
-                                          ),
-
-                                          const SizedBox(
-                                            height: 16,
-                                          ),
-
-                                          SizedBox(
-
-                                            width:
-                                                double.infinity,
-
-                                            child:
-                                                ElevatedButton(
-
-                                              onPressed:
-                                                  () async {
-
-                                                await Navigator.push(
-
-                                                  context,
-
-                                                  MaterialPageRoute(
-
-                                                    builder:
-                                                        (_) =>
-                                                            EditAppointmentScreen(
-
-                                                      appointment:
-                                                          appointment,
-                                                    ),
-                                                  ),
-                                                );
-
-                                                loadAppointments();
-                                              },
-
-                                              child:
-                                                  const Text(
-                                                'Editar',
-                                              ),
-                                            ),
-                                          ),
-
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
-
-                                          SizedBox(
-
-                                            width:
-                                                double.infinity,
-
-                                            child:
-                                                ElevatedButton(
-
-                                              onPressed:
-                                                  () async {
-
-                                                await ApiService
-                                                    .deleteAppointment(
-                                                  appointment[
-                                                      'id'],
-                                                );
-
-                                                loadAppointments();
-                                              },
-
-                                              child:
-                                                  const Text(
-                                                'Excluir',
-                                              ),
-                                            ),
+                                            'Preço: R\$ ${appointment['price']}',
                                           ),
                                         ],
                                       ),
@@ -667,6 +523,9 @@ class _DashboardScreenState
                 ],
               ),
             ),
+          ),
+        ],
+      ),
     );
   }
 }
