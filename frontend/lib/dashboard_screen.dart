@@ -13,6 +13,8 @@ import 'widgets/sidebar.dart';
 
 import 'widgets/sidebar.dart';
 
+import 'widgets/revenue_chart.dart';
+
 class DashboardScreen extends StatefulWidget {
 
   const DashboardScreen({
@@ -302,6 +304,12 @@ class _DashboardScreenState
       const SizedBox(
         height: 24,
       ),
+
+      const RevenueChart(),
+
+      const SizedBox(
+         height: 24,
+        ),
 
       Expanded(
 
