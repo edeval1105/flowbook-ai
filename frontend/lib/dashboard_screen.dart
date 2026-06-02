@@ -15,6 +15,9 @@ import 'widgets/sidebar.dart';
 
 import 'widgets/revenue_chart.dart';
 
+import 'package:provider/provider.dart';
+import 'theme_provider.dart';
+
 class DashboardScreen extends StatefulWidget {
 
   const DashboardScreen({
@@ -461,6 +464,23 @@ class _DashboardScreenState
               ),
 
               actions: [
+
+                    IconButton(
+
+                      onPressed: () {
+
+                        Provider.of<ThemeProvider>(
+
+                          context,
+
+                          listen: false,
+                        ).toggleTheme();
+                      },
+
+                      icon: const Icon(
+                        Icons.dark_mode,
+                      ),
+                    ), 
 
                 IconButton(
 
