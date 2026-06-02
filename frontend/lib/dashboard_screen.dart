@@ -11,6 +11,8 @@ import 'edit_appointment_screen.dart';
 
 import 'widgets/sidebar.dart';
 
+import 'widgets/sidebar.dart';
+
 class DashboardScreen extends StatefulWidget {
 
   const DashboardScreen({
@@ -227,55 +229,262 @@ class _DashboardScreenState
     );
   }
 
+  Widget content() {
+
+  return Column(
+
+    children: [
+
+      Row(
+
+        children: [
+
+          Expanded(
+
+            child: analyticsCard(
+
+              'Agendamentos',
+
+              appointments.length
+                  .toString(),
+
+              Icons.calendar_month,
+
+              Colors.blue,
+            ),
+          ),
+
+          const SizedBox(
+            width: 16,
+          ),
+
+          Expanded(
+
+            child: analyticsCard(
+
+              'Confirmados',
+
+              confirmedCount
+                  .toString(),
+
+              Icons.check_circle,
+
+              Colors.green,
+            ),
+          ),
+        ],
+      ),
+
+      const SizedBox(
+        height: 16,
+      ),
+
+      Row(
+
+        children: [
+
+          Expanded(
+
+            child: analyticsCard(
+
+              'Faturamento',
+
+              'R\$ ${totalRevenue.toStringAsFixed(2)}',
+
+              Icons.attach_money,
+
+              Colors.orange,
+            ),
+          ),
+        ],
+      ),
+
+      const SizedBox(
+        height: 24,
+      ),
+
+      Expanded(
+
+        child:
+            appointments.isEmpty
+
+                ? const Center(
+
+                    child: Text(
+                      'Nenhum agendamento',
+                    ),
+                  )
+
+                : ListView.builder(
+
+                    itemCount:
+                        appointments.length,
+
+                    itemBuilder:
+                        (
+                          context,
+                          index,
+                        ) {
+
+                      final appointment =
+                          appointments[index];
+
+                      return Container(
+
+                        margin:
+                            const EdgeInsets.only(
+                          bottom: 16,
+                        ),
+
+                        padding:
+                            const EdgeInsets.all(
+                          20,
+                        ),
+
+                        decoration:
+                            BoxDecoration(
+
+                          color: Colors.white,
+
+                          borderRadius:
+                              BorderRadius.circular(
+                            20,
+                          ),
+                        ),
+
+                        child: Column(
+
+                          crossAxisAlignment:
+                              CrossAxisAlignment
+                                  .start,
+
+                          children: [
+
+                            Text(
+
+                              appointment[
+                                  'customer_name'],
+
+                              style:
+                                  const TextStyle(
+
+                                fontSize: 20,
+
+                                fontWeight:
+                                    FontWeight.bold,
+                              ),
+                            ),
+
+                            const SizedBox(
+                              height: 12,
+                            ),
+
+                            Text(
+                              'Telefone: ${appointment['customer_phone']}',
+                            ),
+
+                            const SizedBox(
+                              height: 8,
+                            ),
+
+                            Text(
+                              'Preço: R\$ ${appointment['price']}',
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+      ),
+    ],
+  );
+}
+
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
+
+      drawer: MediaQuery.of(context).size.width < 900
+
+    ? const Drawer(
+        child: Sidebar(),
+      )
+
+    : null,
 
       backgroundColor:
           const Color(
         0xfff5f5f5,
       ),
 
-      appBar: AppBar(
+                  appBar: AppBar(
 
-        title: const Text(
-          'FlowBook AI',
-        ),
+              leading:
 
-        actions: [
+                  MediaQuery.of(context)
+                              .size
+                              .width <
+                          900
 
-          IconButton(
+                      ? Builder(
 
-            onPressed: () {
+                          builder: (context) {
 
-              Navigator.push(
+                            return IconButton(
 
-                context,
+                              icon: const Icon(
+                                Icons.menu,
+                              ),
 
-                MaterialPageRoute(
+                              onPressed: () {
 
-                  builder: (_) =>
-                      const CalendarScreen(),
+                                Scaffold.of(context)
+                                    .openDrawer();
+                              },
+                            );
+                          },
+                        )
+
+                      : null,
+
+              title: const Text(
+                'FlowBook AI',
+              ),
+
+              actions: [
+
+                IconButton(
+
+                  onPressed: () {
+
+                    Navigator.push(
+
+                      context,
+
+                      MaterialPageRoute(
+
+                        builder: (_) =>
+                            const CalendarScreen(),
+                      ),
+                    );
+                  },
+
+                  icon: const Icon(
+                    Icons.calendar_month,
+                  ),
                 ),
-              );
-            },
 
-            icon: const Icon(
-              Icons.calendar_month,
+                IconButton(
+
+                  onPressed: logout,
+
+                  icon: const Icon(
+                    Icons.logout,
+                  ),
+                ),
+              ],
             ),
-          ),
-
-          IconButton(
-
-            onPressed: logout,
-
-            icon: const Icon(
-              Icons.logout,
-            ),
-          ),
-        ],
-      ),
 
       floatingActionButton:
           FloatingActionButton(
@@ -309,6 +518,18 @@ class _DashboardScreenState
             CircularProgressIndicator(),
       )
 
+    : MediaQuery.of(context).size.width < 900
+
+    ? Padding(
+
+        padding:
+            const EdgeInsets.all(
+          16,
+        ),
+
+        child: content(),
+      )
+
     : Row(
 
         children: [
@@ -324,208 +545,11 @@ class _DashboardScreenState
                 16,
               ),
 
-              child: Column(
-
-                children: [
-
-                  Row(
-
-                    children: [
-
-                      Expanded(
-
-                        child: analyticsCard(
-
-                          'Agendamentos',
-
-                          appointments.length
-                              .toString(),
-
-                          Icons.calendar_month,
-
-                          Colors.blue,
-                        ),
-                      ),
-
-                      const SizedBox(
-                        width: 16,
-                      ),
-
-                      Expanded(
-
-                        child: analyticsCard(
-
-                          'Confirmados',
-
-                          confirmedCount
-                              .toString(),
-
-                          Icons.check_circle,
-
-                          Colors.green,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 16,
-                  ),
-
-                  Row(
-
-                    children: [
-
-                      Expanded(
-
-                        child: analyticsCard(
-
-                          'Faturamento',
-
-                          'R\$ ${totalRevenue.toStringAsFixed(2)}',
-
-                          Icons.attach_money,
-
-                          Colors.orange,
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 24,
-                  ),
-
-                  Expanded(
-
-                    child:
-                        appointments.isEmpty
-
-                            ? const Center(
-
-                                child: Text(
-                                  'Nenhum agendamento',
-                                ),
-                              )
-
-                            : ListView.builder(
-
-                                itemCount:
-                                    appointments
-                                        .length,
-
-                                itemBuilder:
-                                    (
-                                      context,
-                                      index,
-                                    ) {
-
-                                  final appointment =
-                                      appointments[
-                                          index];
-
-                                  final status =
-                                      appointment[
-                                              'status']
-                                          .toString();
-
-                                  return Container(
-
-                                    margin:
-                                        const EdgeInsets
-                                            .only(
-                                      bottom: 16,
-                                    ),
-
-                                    decoration:
-                                        BoxDecoration(
-
-                                      color:
-                                          Colors.white,
-
-                                      borderRadius:
-                                          BorderRadius
-                                              .circular(
-                                        20,
-                                      ),
-
-                                      boxShadow: [
-
-                                        BoxShadow(
-
-                                          color: Colors
-                                              .black
-                                              .withOpacity(
-                                            0.05,
-                                          ),
-
-                                          blurRadius:
-                                              10,
-                                        ),
-                                      ],
-                                    ),
-
-                                    child: Padding(
-
-                                      padding:
-                                          const EdgeInsets
-                                              .all(
-                                        20,
-                                      ),
-
-                                      child: Column(
-
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment
-                                                .start,
-
-                                        children: [
-
-                                          Text(
-
-                                            appointment[
-                                                'customer_name'],
-
-                                            style:
-                                                const TextStyle(
-
-                                              fontSize:
-                                                  20,
-
-                                              fontWeight:
-                                                  FontWeight
-                                                      .bold,
-                                            ),
-                                          ),
-
-                                          const SizedBox(
-                                            height: 12,
-                                          ),
-
-                                          Text(
-                                            'Telefone: ${appointment['customer_phone']}',
-                                          ),
-
-                                          const SizedBox(
-                                            height: 8,
-                                          ),
-
-                                          Text(
-                                            'Preço: R\$ ${appointment['price']}',
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                  ),
-                ],
-              ),
+              child: content(),
             ),
           ),
         ],
-      ),
+      )
     );
   }
 }
