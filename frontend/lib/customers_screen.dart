@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomersScreen extends StatefulWidget {
 
@@ -36,6 +37,37 @@ class _CustomersScreenState
   ];
 
   String search = '';
+
+  Future<void> openWhatsApp(
+    String phone,
+    String name,
+  ) async {
+
+    final message =
+        'Olá $name, seu agendamento foi confirmado!';
+
+    final cleanPhone =
+        phone.replaceAll(
+      RegExp(r'[^0-9]'),
+      '',
+    );
+
+    final url =
+        'https://wa.me/55$cleanPhone?text=${Uri.encodeComponent(message)}';
+
+    final uri = Uri.parse(url);
+
+    if (await canLaunchUrl(uri)) {
+
+      await launchUrl(uri);
+
+    } else {
+
+      debugPrint(
+        'Não foi possível abrir WhatsApp',
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -229,7 +261,15 @@ class _CustomersScreenState
 
                         IconButton(
 
-                          onPressed: () {},
+                          onPressed: () {
+
+                            openWhatsApp(
+
+                              customer['phone'],
+
+                              customer['name'],
+                            );
+                          },
 
                           icon: const Icon(
                             Icons.message,

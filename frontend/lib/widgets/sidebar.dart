@@ -80,30 +80,36 @@ class Sidebar extends StatelessWidget {
             },
           ),
 
-                    ListTile(
+                            ListTile(
 
-                      leading: const Icon(
-                        Icons.people,
-                      ),
+                              leading: const Icon(
+                                Icons.people,
+                                color: Colors.white,
+                              ),
 
-                      title: const Text(
-                        'Clientes',
-                      ),
+                              title: const Text(
 
-                      onTap: () {
+                                'Clientes',
 
-                        Navigator.push(
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
+                              ),
 
-                          context,
+                              onTap: () {
 
-                          MaterialPageRoute(
+                                Navigator.push(
 
-                            builder: (_) =>
-                                const CustomersScreen(),
-                          ),
-                        );
-                      },
-                    ),
+                                  context,
+
+                                  MaterialPageRoute(
+
+                                    builder: (_) =>
+                                        const CustomersScreen(),
+                                  ),
+                                );
+                              },
+                            ),
 
           ListTile(
 
