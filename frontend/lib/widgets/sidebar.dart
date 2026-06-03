@@ -4,6 +4,7 @@ import '../dashboard_screen.dart';
 import '../calendar_screen.dart';
 import '../customers_screen.dart';
 import '../ai_screen.dart';
+import '../notifications_screen.dart';
 
 class Sidebar extends StatelessWidget {
 
@@ -143,6 +144,39 @@ class Sidebar extends StatelessWidget {
               },
             ),
           
+          
+              ListTile(
+
+                leading: const Icon(
+                  Icons.notifications,
+                  color: Colors.white,
+                ),
+
+                title: const Text(
+
+                  'Notificações',
+
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+
+                onTap: () {
+
+                  Navigator.push(
+
+                    context,
+
+                    MaterialPageRoute(
+
+                      builder: (_) =>
+                          const NotificationsScreen(),
+                    ),
+                  );
+                },
+              ),
+
+
           ListTile(
 
             leading: const Icon(
