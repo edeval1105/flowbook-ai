@@ -6,6 +6,7 @@ import '../customers_screen.dart';
 import '../ai_screen.dart';
 import '../notifications_screen.dart';
 import '../company_screen.dart';
+import '../plans_screen.dart';
 
 class Sidebar extends StatelessWidget {
 
@@ -207,6 +208,39 @@ class Sidebar extends StatelessWidget {
                   );
                 },
               ),
+
+              
+               ListTile(
+
+                leading: const Icon(
+                  Icons.workspace_premium,
+                  color: Colors.white,
+                ),
+
+                title: const Text(
+
+                  'Planos',
+
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+
+                onTap: () {
+
+                  Navigator.push(
+
+                    context,
+
+                    MaterialPageRoute(
+
+                      builder: (_) =>
+                          const PlansScreen(),
+                    ),
+                  );
+                },
+              ),
+
 
           ListTile(
 
