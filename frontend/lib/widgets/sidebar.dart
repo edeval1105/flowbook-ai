@@ -7,6 +7,7 @@ import '../ai_screen.dart';
 import '../notifications_screen.dart';
 import '../company_screen.dart';
 import '../plans_screen.dart';
+import '../reports_screen.dart';
 
 class Sidebar extends StatelessWidget {
 
@@ -241,6 +242,36 @@ class Sidebar extends StatelessWidget {
                 },
               ),
 
+          ListTile(
+
+            leading: const Icon(
+              Icons.bar_chart,
+              color: Colors.white,
+            ),
+
+            title: const Text(
+
+              'Relatórios',
+
+              style: TextStyle(
+                color: Colors.white,
+              ),
+            ),
+
+            onTap: () {
+
+              Navigator.push(
+
+                context,
+
+                MaterialPageRoute(
+
+                  builder: (_) =>
+                      const ReportsScreen(),
+                ),
+              );
+            },
+          ),
 
           ListTile(
 
