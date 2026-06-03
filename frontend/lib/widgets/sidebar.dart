@@ -8,6 +8,7 @@ import '../notifications_screen.dart';
 import '../company_screen.dart';
 import '../plans_screen.dart';
 import '../reports_screen.dart';
+import '../team_screen.dart';
 
 class Sidebar extends StatelessWidget {
 
@@ -272,6 +273,37 @@ class Sidebar extends StatelessWidget {
               );
             },
           ),
+
+        ListTile(
+
+          leading: const Icon(
+            Icons.groups,
+            color: Colors.white,
+          ),
+
+          title: const Text(
+
+            'Equipe',
+
+            style: TextStyle(
+              color: Colors.white,
+            ),
+          ),
+
+          onTap: () {
+
+            Navigator.push(
+
+              context,
+
+              MaterialPageRoute(
+
+                builder: (_) =>
+                    const TeamScreen(),
+              ),
+            );
+          },
+        ),
 
           ListTile(
 
