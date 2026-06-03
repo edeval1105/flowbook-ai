@@ -113,6 +113,21 @@ class _CreateAppointmentScreenState
                        priceController.text,
       );
 
+                    if (context.mounted) {
+
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(
+
+                        const SnackBar(
+
+                          content: Text(
+                            'Agendamento criado com sucesso',
+                          ),
+                        ),
+                      );
+                    }
+
   print(result);
 
   if (context.mounted) {

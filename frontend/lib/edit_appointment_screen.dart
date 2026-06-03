@@ -150,6 +150,21 @@ class _EditAppointmentScreenState
 
                   if (context.mounted) {
 
+                      ScaffoldMessenger.of(
+                        context,
+                      ).showSnackBar(
+
+                        const SnackBar(
+
+                          content: Text(
+                            'Agendamento atualizado',
+                          ),
+                        ),
+                      );
+                    }
+
+                  if (context.mounted) {
+
                     Navigator.pop(
                       context,
                     );

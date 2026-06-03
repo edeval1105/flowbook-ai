@@ -45,7 +45,7 @@ class _CalendarScreenState
       setState(() {
 
         appointments =
-            data is List ? data : [];
+            data;
 
         loading = false;
       });
@@ -167,8 +167,8 @@ class _CalendarScreenState
                         BoxShadow(
 
                           color: Colors.black
-                              .withOpacity(
-                            0.05,
+                              .withValues(
+                            alpha: 0.05,
                           ),
 
                           blurRadius: 10,
@@ -316,8 +316,8 @@ class _CalendarScreenState
 
                                           color: Colors
                                               .black
-                                              .withOpacity(
-                                            0.05,
+                                              .withValues(
+                                            alpha: 0.05,
                                           ),
 
                                           blurRadius:

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../dashboard_screen.dart';
 import '../calendar_screen.dart';
+import '../customers_screen.dart';
 
 class Sidebar extends StatelessWidget {
 
@@ -51,6 +52,8 @@ class Sidebar extends StatelessWidget {
               color: Colors.white,
             ),
 
+            
+
             title: const Text(
 
               'Dashboard',
@@ -59,6 +62,8 @@ class Sidebar extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+
+            
 
             onTap: () {
 
@@ -74,6 +79,31 @@ class Sidebar extends StatelessWidget {
               );
             },
           ),
+
+                    ListTile(
+
+                      leading: const Icon(
+                        Icons.people,
+                      ),
+
+                      title: const Text(
+                        'Clientes',
+                      ),
+
+                      onTap: () {
+
+                        Navigator.push(
+
+                          context,
+
+                          MaterialPageRoute(
+
+                            builder: (_) =>
+                                const CustomersScreen(),
+                          ),
+                        );
+                      },
+                    ),
 
           ListTile(
 
